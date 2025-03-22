@@ -1,8 +1,10 @@
 import express from 'express';
 import indexRoutes from './routes/index.mjs';
+import sequelize from './config/database.mjs';
 
 const app = express();
 app.use(express.json());
+
 
 app.use('/', indexRoutes);
 
