@@ -1,9 +1,14 @@
 version: "3.9"
 
+networks:
+  gh_dashboard:
+
 services:
   backend:
     build: ./backend
     container_name: express_backend
+    networks:
+      - gh_dashboard
     ports:
       - "3000:3000"
     depends_on:
@@ -21,6 +26,8 @@ services:
   postgres:
     image: postgres:16
     container_name: postgres_db
+    networks:
+      - gh_dashboard
     restart: always
     environment:
       POSTGRES_USER: postgres
@@ -34,6 +41,8 @@ services:
   app:
     build: ./app
     container_name: vite_app
+    networks:
+      - gh_dashboard
     ports:
       - "5173:5173"
     volumes:
