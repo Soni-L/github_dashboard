@@ -1,4 +1,5 @@
 import "./App.css";
+import { useLocalStorage } from "usehooks-ts";
 
 const loginWithGithub = () => {
   window.location.assign(
@@ -9,6 +10,9 @@ const loginWithGithub = () => {
 };
 
 function App() {
+  const [value, , removeValue] = useLocalStorage("github_access_token", 0);
+
+  console.log(value);
   return (
     <div>
       <button onClick={loginWithGithub}>Login with Github</button>
