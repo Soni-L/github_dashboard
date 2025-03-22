@@ -13,7 +13,7 @@ const GithubAuth = () => {
     const getAccessToken = async () => {
       try {
         await fetch(
-          `${BACKEND_URL}/auth/github/getAccessToken?code=${codeParam}`,
+          `${BACKEND_URL}/auth/getAccessToken?code=${codeParam}`,
           {
             method: "GET",
           }
@@ -22,13 +22,12 @@ const GithubAuth = () => {
             return response.json();
           })
           .then((data) => {
-            console.log(data);
             if (data.access_token) {
               window.localStorage.setItem(
                 'github_access_token',
                 data.access_token
               );
-              navigate("/auth", { replace: true });
+              navigate("/", { replace: true });
             }
           });
       } catch (error) {

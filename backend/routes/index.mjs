@@ -8,6 +8,6 @@ router.get('/', home);
 router.get('/users', getUsers);
 router.post('/users', createUser);
 
-router.post('/auth/github', getAccessToken);
+router.get('/auth/getAccessToken', getAccessToken);
 
 export default router;

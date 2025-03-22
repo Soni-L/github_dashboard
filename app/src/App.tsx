@@ -9,7 +9,11 @@ const loginWithGithub = () => {
 };
 
 function App() {
-  return <div></div>;
+  return (
+    <div>
+      <button onClick={loginWithGithub}>Login with Github</button>
+    </div>
+  );
 }
 
 export default App;
