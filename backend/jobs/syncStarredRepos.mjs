@@ -104,14 +104,12 @@ export async function syncStarredRepos() {
           commit_data: commitData,
         });
       }
-
-      // ✅ Mark job as complete
-
-      await CronJob.upsert({ job_name: jobName, job_status: "RUN_COMPLETE" });
-      console.log(`✅ Synced starred repos`);
     } catch (err) {
       console.error(`❌ Error syncing ${username}:`, err.message);
-      await CronJob.upsert({ job_name: jobName, job_status: "RUN_COMPLETE" });
     }
   }
+
+  // ✅ Mark job as complete
+  await CronJob.upsert({ job_name: jobName, job_status: "RUN_COMPLETE" });
+  console.log(`✅ Synced starred repos`);
 }
