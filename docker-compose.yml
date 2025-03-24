@@ -47,6 +47,7 @@ services:
       - VITE_APP_BACKEND_URL=http://localhost:3000
     volumes:
       - ./app:/usr/src/app
+      - /usr/src/app/node_modules # Preserve container's node_modules
 
 volumes:
   postgres_data:
