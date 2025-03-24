@@ -3,6 +3,7 @@ import "./App.css";
 import { useLocalStorage } from "usehooks-ts";
 import ProfileCard from "./components/ProfileCard/ProfileCard";
 import StarredReposCard from "./components/StarredReposCard/StarredReposCard";
+import RepoStatsCard from "./components/RepoStats/RepoStatsCard";
 const BACKEND_URL = import.meta.env.VITE_APP_BACKEND_URL;
 
 const loginWithGithub = () => {
@@ -42,7 +43,7 @@ function App() {
 
   const [userData, setUserData] = useState<UserData | null>(null);
   const [starredRepos, setStarredRepos] = useState<RepoData[] | null>(null);
-  const [starredRepoStats, setStarredRepoStats] = useState<RepoStats[] | null>(
+  const [starredReposStats, setStarredReposStats] = useState<RepoStats[] | null>(
     null
   );
 
@@ -80,15 +81,13 @@ function App() {
       fetch(`${BACKEND_URL}/getStarredRepos?access_token=${value}`, {})
         .then((response) => response.json())
         .then((data) => {
-          setStarredRepoStats(data);
+          setStarredReposStats(data);
         })
         .catch((error) => {
           console.error("Error fetching repo stats:", error);
         });
     }
   }, [value]);
-
-  console.log(starredRepoStats);
 
   return (
     <div
@@ -110,6 +109,7 @@ function App() {
             width: "200px",
             height: "40px",
             cursor: "pointer",
+            margin: "auto",
           }}
           onClick={loginWithGithub}
         >
@@ -121,7 +121,6 @@ function App() {
             style={{
               display: "flex",
               justifyContent: "flex-end",
-              borderBottom: "1px solid",
               padding: "8px",
             }}
           >
@@ -138,12 +137,13 @@ function App() {
                 window.location.reload();
               }}
             >
-              Disconnect from Github
+              Disconnect Github
             </button>
           </nav>
           <div style={{ display: "flex", gap: "16px" }}>
             {userData && <ProfileCard userData={userData} />}
             {starredRepos && <StarredReposCard starredRepos={starredRepos} />}
+            {starredReposStats && <RepoStatsCard starredReposStats={starredReposStats} />}
           </div>
         </>
       )}
