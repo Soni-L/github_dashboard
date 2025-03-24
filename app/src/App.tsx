@@ -19,9 +19,15 @@ function App() {
     email: string;
     location: string;
   }
-  
+
+  interface RepoData {
+    id: string;
+    full_name: string;
+    private: boolean;
+  }
+
   const [userData, setUserData] = useState<UserData | null>(null);
-  const [starredRepos, setStarredRepos] = useState<object | null>(null);
+  const [starredRepos, setStarredRepos] = useState<RepoData[] | null>(null);
 
   useEffect(() => {
     if (!value) {
@@ -109,7 +115,7 @@ function App() {
               Disconnect from Github
             </button>
           </nav>
-          <div style={{ display: "flex", gap: "8px" }}>
+          <div style={{ display: "flex", gap: "16px" }}>
             {userData && (
               <section
                 style={{
@@ -159,19 +165,61 @@ function App() {
             {starredRepos && (
               <section
                 style={{
-                  display: "flex",
-                  flexDirection: "column",
                   padding: "8px",
                   paddingTop: "2px",
                   border: "1px solid",
                   borderRadius: "8px",
-                  gap: "8px",
-                  width: "fit-content",
                 }}
               >
                 <h4 style={{ margin: 0, color: "gold" }}>
                   Starred repositories
                 </h4>
+
+                <div
+                  style={{
+                    display: "grid",
+                    gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+                    gap: "16px",
+                  }}
+                >
+                  {starredRepos?.map((repo: RepoData) => {
+                    return (
+                      <div
+                        key={repo.id}
+                        style={{
+                          display: "flex",
+                          flexDirection: "column",
+                          padding: "16px",
+                          borderBottom: "1px solid",
+                          gap: "8px",
+                        }}
+                      >
+                        <h4 style={{ margin: 0, color: "gold" }}>
+                          {repo.full_name}
+                        </h4>
+
+                        <p style={{ margin: "0" }}>
+                          <strong>Owner:</strong> {repo.full_name.split("/")[0]}
+                        </p>
+
+                        <p style={{ margin: "0" }}>
+                          <strong>Link:</strong>{" "}
+                          <a
+                            href={`https://github.com/${repo.full_name}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            {repo.full_name}
+                          </a>
+                        </p>
+
+                        <p style={{ margin: "0" }}>
+                          <strong>Private:</strong> {repo.private?.toString()}
+                        </p>
+                      </div>
+                    );
+                  })}
+                </div>
               </section>
             )}
           </div>
