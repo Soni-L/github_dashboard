@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 import { useLocalStorage } from "usehooks-ts";
+const BACKEND_URL = import.meta.env.VITE_APP_BACKEND_URL;
 
 const loginWithGithub = () => {
   window.location.assign(
@@ -26,8 +27,22 @@ function App() {
     private: boolean;
   }
 
+  interface RepoStats {
+    id: string;
+    username: string;
+    repo_link: string;
+    commit_data: {
+      daily: { date: string; commits: number }[];
+      max_daily_commits: number;
+      total_commits: number;
+    };
+  }
+
   const [userData, setUserData] = useState<UserData | null>(null);
   const [starredRepos, setStarredRepos] = useState<RepoData[] | null>(null);
+  const [starredRepoStats, setStarredRepoStats] = useState<RepoStats[] | null>(
+    null
+  );
 
   useEffect(() => {
     if (!value) {
@@ -42,7 +57,6 @@ function App() {
         .then((response) => response.json())
         .then((data) => {
           setUserData(data);
-          // Do something with the user profile data
         })
         .catch((error) => {
           console.error("Error fetching user profile:", error);
@@ -56,14 +70,24 @@ function App() {
         .then((response) => response.json())
         .then((data) => {
           setStarredRepos(data);
-          // Do something with the user profile data
         })
         .catch((error) => {
-          console.error("Error fetching user profile:", error);
+          console.error("Error fetching starred repos:", error);
+        });
+
+      fetch(`${BACKEND_URL}/getStarredRepos?access_token=${value}`, {})
+        .then((response) => response.json())
+        .then((data) => {
+          setStarredRepoStats(data);
+        })
+        .catch((error) => {
+          console.error("Error fetching repo stats:", error);
         });
     }
   }, [value]);
 
+  console.log(starredRepoStats);
+  
   return (
     <div
       style={{

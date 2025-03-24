@@ -1,5 +1,6 @@
 import fetch from "node-fetch";
 import GithubToken from "../models/GithubToken.mjs";
+import StarredRepository from "../models/StarredRepository.mjs";
 import dotenv from "dotenv";
 
 dotenv.config();
@@ -28,7 +29,7 @@ export const getAccessToken = async (req, res) => {
     // Get the username
     const userResp = await fetch("https://api.github.com/user", {
       headers: {
-      Authorization: `token ${access_token}`,
+        Authorization: `token ${access_token}`,
       },
     });
     const userData = await userResp.json();
@@ -43,5 +44,31 @@ export const getAccessToken = async (req, res) => {
     res.json(data);
   } catch (err) {
     res.json(err);
+  }
+};
+
+export const getStarredRepos = async (req, res) => {
+  const { access_token } = req.query;
+
+  try {
+    // Verify the access token
+    const verifyResp = await fetch("https://api.github.com/user", {
+      headers: {
+        Authorization: `token ${access_token}`,
+      },
+    });
+
+    if (verifyResp.status !== 200) {
+      throw new Error("Invalid access token");
+    }
+
+    const data = await verifyResp.json();
+
+    let repoWithStats = await StarredRepository.findAll({
+      where: { username: data.login },
+    });
+    res.json(repoWithStats);
+  } catch (err) {
+    res.json({ error: err.message });
   }
 };
