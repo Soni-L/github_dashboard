@@ -16,6 +16,7 @@ services:
       - DB_PORT=5432
       - GITHUB_CLIENT_ID=Ov23liqag9cwD6CjBQRt
       - GITHUB_CLIENT_SECRET=0c766a5a6f7db5cf65e505de3fd26896ab1ee1c1
+      - SYNC_INTERVAL=3600000
     volumes:
       - ./backend:/usr/src/app
     command: npm run dev
