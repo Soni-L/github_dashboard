@@ -1,4 +1,5 @@
 import fetch from "node-fetch";
+import GithubToken from "../models/GithubToken.mjs";
 import dotenv from "dotenv";
 
 dotenv.config();
@@ -22,6 +23,23 @@ export const getAccessToken = async (req, res) => {
     );
 
     const data = await response.json();
+    const access_token = data.access_token;
+
+    // Get the username
+    const userResp = await fetch("https://api.github.com/user", {
+      headers: {
+      Authorization: `token ${access_token}`,
+      },
+    });
+    const userData = await userResp.json();
+    const username = userData.login;
+
+    // Save or update the token
+    await GithubToken.upsert({
+      username,
+      access_token,
+    });
+
     res.json(data);
   } catch (err) {
     res.json(err);

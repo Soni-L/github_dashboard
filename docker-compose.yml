@@ -14,6 +14,8 @@ services:
       - DB_PASSWORD=postgres
       - DB_NAME=my_database
       - DB_PORT=5432
+      - GITHUB_CLIENT_ID=Ov23liqag9cwD6CjBQRt
+      - GITHUB_CLIENT_SECRET=0c766a5a6f7db5cf65e505de3fd26896ab1ee1c1
     volumes:
       - ./backend:/usr/src/app
     command: npm run dev
@@ -38,6 +40,9 @@ services:
     container_name: vite_app
     ports:
       - "8080:8080"
+    environment:
+      - VITE_APP_GITHUB_CLIENT_ID=Ov23liqag9cwD6CjBQRt
+      - VITE_APP_BACKEND_URL=http://localhost:3000
     volumes:
       - ./app:/usr/src/app
 

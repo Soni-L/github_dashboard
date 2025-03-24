@@ -1,4 +1,4 @@
 import sequelize from '../config/database.mjs';
-import User from './user.mjs';
+import GithubToken from './GithubToken.mjs';
 
-export { sequelize, User };
+export { sequelize, GithubToken };
