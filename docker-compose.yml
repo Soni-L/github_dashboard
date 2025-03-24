@@ -19,7 +19,7 @@ services:
       - SYNC_INTERVAL=3600000
     volumes:
       - ./backend:/usr/src/app
-      - /usr/src/app/node_modules  # Preserve container's node_modules
+      - /usr/src/app/node_modules # Preserve container's node_modules
     command: npm run start
 
   postgres:
