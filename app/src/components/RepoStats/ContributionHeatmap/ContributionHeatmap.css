@@ -1,0 +1,81 @@
+.heatmap-container {
+  display: flex;
+}
+
+.weekdays {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-right: 8px;
+  font-size: 12px;
+  gap: "1px";
+  color: #555;
+}
+
+.weekday-label {
+  height: 20px;
+}
+
+.heatmap {
+  display: flex;
+  gap: 4px;
+}
+
+.week {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.day {
+  width: 14px;
+  height: 14px;
+  border-radius: 2px;
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.day:hover {
+  transform: scale(1.4);
+  z-index: 10;
+}
+
+.tooltip {
+  visibility: hidden;
+  width: max-content;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  padding: 4px 6px;
+  border-radius: 4px;
+  position: absolute;
+  top: -35px;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  font-size: 12px;
+  pointer-events: none;
+}
+
+.day:hover .tooltip {
+  visibility: visible;
+}
+
+.month-labels {
+  margin-left: 40px;
+  display: flex;
+  gap: 4px;
+  font-size: 12px;
+  color: #555;
+  padding-top: 5px;
+}
+
+.month-label {
+  width: 14px;
+  text-align: center;
+}
+
+.month-label.empty {
+  color: transparent;
+}

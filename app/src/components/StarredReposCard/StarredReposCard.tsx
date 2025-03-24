@@ -20,10 +20,12 @@ const StarredReposCard: React.FC<StarredReposCardProps> = ({
         paddingTop: "2px",
         border: "1px solid",
         borderRadius: "8px",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
       }}
     >
       <h4 style={{ margin: 0, color: "gold" }}>Starred repositories</h4>
-
       <div
         style={{
           display: "grid",
@@ -45,7 +47,7 @@ const StarredReposCard: React.FC<StarredReposCardProps> = ({
                   gap: "8px",
                 }}
               >
-                <h4 style={{ margin: 0, color: "gold" }}>{repo.full_name}</h4>
+                <h5 style={{ margin: 0, color: "gold" }}>{repo.full_name}</h5>
 
                 <p style={{ margin: "0" }}>
                   <strong>Owner:</strong> {repo.full_name.split("/")[0]}
