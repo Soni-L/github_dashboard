@@ -1,7 +1,7 @@
 import GithubToken from "../models/GithubToken.mjs";
 import StarredRepository from "../models/StarredRepository.mjs";
 import fetch from "node-fetch";
-import { subYears, formatISO, parseISO } from "date-fns";
+import { subYears, formatISO, parseISO, startOfDay } from "date-fns";
 
 const GITHUB_API = "https://api.github.com";
 
@@ -13,7 +13,7 @@ async function fetchStarredRepos(token) {
 }
 
 async function fetchCommitStats(owner, repo, token) {
-  const sinceDate = subYears(new Date(), 1).toISOString(); // 1 year ago
+  const sinceDate = startOfDay(subYears(new Date(), 1)).toISOString(); // 1 year ago at  00:00:00 hours
   const commitsEndpoint = `https://api.github.com/repos/${owner}/${repo}/commits?since=${sinceDate}&per_page=100`;
 
   let page = 1;
@@ -63,13 +63,13 @@ async function fetchCommitStats(owner, repo, token) {
     total_commits,
     max_daily_commits,
     daily,
+    sinceDate: formatISO(parseISO(sinceDate), { representation: "date" }),
+    fromDate: formatISO(new Date(), { representation: "date" }),
   };
 }
 
 export async function syncStarredRepos() {
   const users = await GithubToken.findAll();
-
-  console.log(users)
 
   for (const user of users) {
     const { username, access_token } = user;
