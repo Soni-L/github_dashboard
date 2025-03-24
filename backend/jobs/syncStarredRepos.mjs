@@ -1,5 +1,6 @@
 import GithubToken from "../models/GithubToken.mjs";
 import StarredRepository from "../models/StarredRepository.mjs";
+import CronJob from "../models/CronJob.mjs";
 import fetch from "node-fetch";
 import { subYears, formatISO, parseISO, startOfDay } from "date-fns";
 
@@ -69,6 +70,11 @@ async function fetchCommitStats(owner, repo, token) {
 }
 
 export async function syncStarredRepos() {
+  const jobName = "syncStarredRepos";
+
+  // Mark job as running
+  await CronJob.upsert({ job_name: jobName, job_status: "RUNNING" });
+
   const users = await GithubToken.findAll();
 
   for (const user of users) {
@@ -90,8 +96,13 @@ export async function syncStarredRepos() {
           commit_data: commitData,
         });
       }
+
+      // ✅ Mark job as complete
+      await CronJob.upsert({ job_name: jobName, job_status: "RUN_COMPLETE" });
+      
     } catch (err) {
       console.error(`❌ Error syncing ${username}:`, err.message);
+      await CronJob.upsert({ job_name: jobName, job_status: "RUN_COMPLETE" });
     }
   }
 }

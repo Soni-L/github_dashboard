@@ -1,5 +1,6 @@
 import React from "react";
 import ContributionHeatmap from "./ContributionHeatmap/ContributionHeatmap";
+import RepoStatsStatusChecker from "./RepoStatsStatusChecker/RepoStatsStatusChecker";
 
 interface RepoStats {
   id: string;
@@ -53,10 +54,7 @@ const RepoStatsCard: React.FC<RepoStatsCardProps> = ({ starredReposStats }) => {
             gap: "8px",
           }}
         >
-          <h4 style={{ margin: 0, color: "red" }}>
-            No starred repo stats available
-          </h4>
-          <h5 style={{ margin: 0 }}>Wait a bit and refresh the page!</h5>
+          <RepoStatsStatusChecker job_name={"syncStarredRepos"} />
         </div>
       )}
     </div>
