@@ -23,6 +23,8 @@ export default function RepoStatsStatusChecker({
             cursor: "pointer",
             backgroundColor: "green",
             padding: "4px",
+            borderRadius: "4px",
+            maxWidth: "200px",
           }}
           onClick={() => window.location.reload()}
         >

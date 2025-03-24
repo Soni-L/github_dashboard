@@ -1,7 +1,6 @@
 import React from "react";
 import ContributionHeatmap from "./ContributionHeatmap/ContributionHeatmap";
 import RepoStatsStatusChecker from "./RepoStatsStatusChecker/RepoStatsStatusChecker";
-
 interface RepoStats {
   id: string;
   username: string;

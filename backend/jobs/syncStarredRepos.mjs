@@ -72,6 +72,14 @@ async function fetchCommitStats(owner, repo, token) {
 export async function syncStarredRepos() {
   const jobName = "syncStarredRepos";
 
+  // Check if job is already running
+  const job = await CronJob.findOne({ where: { job_name: jobName } });
+
+  if (job && job.job_status === "RUNNING") {
+    console.log(`🔁 Job ${jobName} is already running`);
+    return;
+  }
+
   // Mark job as running
   await CronJob.upsert({ job_name: jobName, job_status: "RUNNING" });
 
@@ -101,7 +109,6 @@ export async function syncStarredRepos() {
 
       await CronJob.upsert({ job_name: jobName, job_status: "RUN_COMPLETE" });
       console.log(`✅ Synced starred repos`);
-      
     } catch (err) {
       console.error(`❌ Error syncing ${username}:`, err.message);
       await CronJob.upsert({ job_name: jobName, job_status: "RUN_COMPLETE" });
