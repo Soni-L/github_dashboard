@@ -33,7 +33,7 @@ const StarredReposCard: React.FC<StarredReposCardProps> = ({
           gap: "16px",
         }}
       >
-        {starredRepos?.length ? (
+        {starredRepos && starredRepos?.length > 0 ? (
           starredRepos?.map((repo: RepoData, index) => {
             return (
               <div

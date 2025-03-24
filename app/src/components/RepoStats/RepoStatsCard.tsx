@@ -34,7 +34,7 @@ const RepoStatsCard: React.FC<RepoStatsCardProps> = ({ starredReposStats }) => {
         Starred repos commit charts
       </h4>
 
-      {starredReposStats?.length &&
+      {starredReposStats && starredReposStats?.length > 0 ? (
         starredReposStats.map((repoStats: RepoStats) => (
           <div>
             <h5 style={{ margin: 0, padding: "8px 0" }}>
@@ -42,7 +42,23 @@ const RepoStatsCard: React.FC<RepoStatsCardProps> = ({ starredReposStats }) => {
             </h5>
             <ContributionHeatmap data={repoStats.commit_data.daily} />
           </div>
-        ))}
+        ))
+      ) : (
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            padding: "8px",
+            gap: "8px",
+          }}
+        >
+          <h4 style={{ margin: 0, color: "red" }}>
+            No starred repo stats available
+          </h4>
+          <h5 style={{ margin: 0 }}>Wait a bit and refresh the page!</h5>
+        </div>
+      )}
     </div>
   );
 };
