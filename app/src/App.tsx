@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 import { useLocalStorage } from "usehooks-ts";
+import ProfileCard from "./components/ProfileCard/ProfileCard";
 const BACKEND_URL = import.meta.env.VITE_APP_BACKEND_URL;
 
 const loginWithGithub = () => {
@@ -87,7 +88,7 @@ function App() {
   }, [value]);
 
   console.log(starredRepoStats);
-  
+
   return (
     <div
       style={{
@@ -140,51 +141,7 @@ function App() {
             </button>
           </nav>
           <div style={{ display: "flex", gap: "16px" }}>
-            {userData && (
-              <section
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  padding: "16px",
-                  border: "1px solid",
-                  borderRadius: "8px",
-                  gap: "8px",
-                  width: "fit-content",
-                  position: "relative",
-                  paddingTop: "28px",
-                }}
-              >
-                <h4
-                  style={{
-                    top: 0,
-                    position: "absolute",
-                    margin: "0",
-                    whiteSpace: "nowrap",
-                    left: "50%",
-                    transform: "translate(-50%, 0)",
-                    color: "gold",
-                  }}
-                >
-                  Github user data
-                </h4>
-                <img
-                  src={userData?.avatar_url || ""}
-                  style={{ height: "200px", width: "200px" }}
-                ></img>
-                <p style={{ margin: "0" }}>
-                  <strong>Name:</strong> {userData?.name}
-                </p>
-                <p style={{ margin: "0" }}>
-                  <strong>Username:</strong> {userData?.login}
-                </p>
-                <p style={{ margin: "0" }}>
-                  <strong>Email:</strong> {userData?.email}
-                </p>
-                <p style={{ margin: "0" }}>
-                  <strong>Location:</strong> {userData?.location}
-                </p>
-              </section>
-            )}
+            {userData && <ProfileCard userData={userData} />}
 
             {starredRepos && (
               <section
