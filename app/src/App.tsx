@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import "./App.css";
 import { useLocalStorage } from "usehooks-ts";
 import ProfileCard from "./components/ProfileCard/ProfileCard";
+import StarredReposCard from "./components/StarredReposCard/StarredReposCard";
 const BACKEND_URL = import.meta.env.VITE_APP_BACKEND_URL;
 
 const loginWithGithub = () => {
@@ -142,67 +143,7 @@ function App() {
           </nav>
           <div style={{ display: "flex", gap: "16px" }}>
             {userData && <ProfileCard userData={userData} />}
-
-            {starredRepos && (
-              <section
-                style={{
-                  padding: "8px",
-                  paddingTop: "2px",
-                  border: "1px solid",
-                  borderRadius: "8px",
-                }}
-              >
-                <h4 style={{ margin: 0, color: "gold" }}>
-                  Starred repositories
-                </h4>
-
-                <div
-                  style={{
-                    display: "grid",
-                    gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
-                    gap: "16px",
-                  }}
-                >
-                  {starredRepos?.map((repo: RepoData) => {
-                    return (
-                      <div
-                        key={repo.id}
-                        style={{
-                          display: "flex",
-                          flexDirection: "column",
-                          padding: "16px",
-                          borderBottom: "1px solid",
-                          gap: "8px",
-                        }}
-                      >
-                        <h4 style={{ margin: 0, color: "gold" }}>
-                          {repo.full_name}
-                        </h4>
-
-                        <p style={{ margin: "0" }}>
-                          <strong>Owner:</strong> {repo.full_name.split("/")[0]}
-                        </p>
-
-                        <p style={{ margin: "0" }}>
-                          <strong>Link:</strong>{" "}
-                          <a
-                            href={`https://github.com/${repo.full_name}`}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                          >
-                            {repo.full_name}
-                          </a>
-                        </p>
-
-                        <p style={{ margin: "0" }}>
-                          <strong>Private:</strong> {repo.private?.toString()}
-                        </p>
-                      </div>
-                    );
-                  })}
-                </div>
-              </section>
-            )}
+            {starredRepos && <StarredReposCard starredRepos={starredRepos} />}
           </div>
         </>
       )}
