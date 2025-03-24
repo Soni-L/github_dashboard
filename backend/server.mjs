@@ -23,5 +23,4 @@ await app.listen(PORT, () =>
 // Example using setInterval (configurable via .env)
 const interval = process.env.SYNC_INTERVAL || 3600000; // 1 hour default
 
-setImmediate(syncStarredRepos);
 setInterval(syncStarredRepos, interval);

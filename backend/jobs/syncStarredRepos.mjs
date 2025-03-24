@@ -98,7 +98,9 @@ export async function syncStarredRepos() {
       }
 
       // ✅ Mark job as complete
+
       await CronJob.upsert({ job_name: jobName, job_status: "RUN_COMPLETE" });
+      console.log(`✅ Synced starred repos`);
       
     } catch (err) {
       console.error(`❌ Error syncing ${username}:`, err.message);
