@@ -22,7 +22,7 @@ The application will run at: http://localhost:8080
 
 ### Backend
 
-- Add global error hanlder middleware in order for the server not to crash during unhanlded errors escaped from one of the endpoints
+- Add global error handler middleware in order for the server not to crash during unhanlded errors escaped from one of the endpoints
 
 - Create an additional timer job to handle refreshing of the tokens that are expired in the db
 
