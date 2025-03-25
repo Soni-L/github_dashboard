@@ -17,8 +17,12 @@ Handle expired tokens, write a http request interceptor that triggers a refresh 
 
 Create a folder for Shared typescript types & interfaces and one for constants as well, do not redefine interfaces in several files and do the same thing for constants
 
+Add global error handler (error boundary) fallback page
+
 
 ### Backend
+
+Add global error hanlder middleware in order for the server not to crash during unhanlded errors escaped from one of the endpoints
 
 Create an additional timer job to handle refreshing of the tokens that are expired in the db
 
@@ -31,4 +35,5 @@ Do not save the github access token raw in the database, encrypt it instead with
 Do not store secrets such as the github secret key directly in the repo files, inject them instead from secret vaults in the ENV
 
 Optimize the docker builds (for both FE and BE) for production, do not serve them from preview modes or nodemon
+
 
