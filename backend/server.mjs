@@ -44,7 +44,7 @@ await app.listen(PORT, () =>
   console.log(`🚀 Server running at http://localhost:${PORT}`)
 );
 
-// Example using setInterval (configurable via .env)
-const interval = process.env.SYNC_INTERVAL || 3600000; // 1 hour default
+// Sync starred repos every hour
+const interval = process.env.SYNC_INTERVAL || 3600000;
 
 setInterval(syncStarredRepos, interval);
