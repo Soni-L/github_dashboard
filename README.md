@@ -1,9 +1,13 @@
 ## Running the project
 
+Make sure the ports 8080 (FE), 3000 (BE) and 5432 (DB) are unassigned on your local machine
+
+Run the command:
+
 ```diff
 docker-compose up --build
 ```
-The application will run at: http://localhost:8080
+The application will be available at: http://localhost:8080
 
 ## Necessary improvements:
 
