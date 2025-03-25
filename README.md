@@ -15,10 +15,16 @@ Separate CSS in different files from the JSX (avoid inline styles)
 
 Handle expired tokens, write a http request interceptor that triggers a refresh token flow when there is an auth failure due to expiration
 
+Create a folder for Shared typescript types & interfaces and one for constants as well, do not redefine interfaces in several files and do the same thing for constants
+
 
 ### Backend
 
-Provide Migration files instead of relying on sequelize sync for safer schema integrity
+Create an additional timer job to handle refreshing of the tokens that are expired in the db
+
+Be mindful of hitting the github rate limits when scanning through many repos, do not run jobs too frequently, improve cron job to be more selective in reaping data
+
+Provide Migration files instead of relying on sequelize sync, for a safer DB schema integrity and to avoid data loss
 
 Do not save the github access token raw in the database, encrypt it instead with a secret key
 
