@@ -43,9 +43,9 @@ function App() {
 
   const [userData, setUserData] = useState<UserData | null>(null);
   const [starredRepos, setStarredRepos] = useState<RepoData[] | null>(null);
-  const [starredReposStats, setStarredReposStats] = useState<RepoStats[] | null>(
-    null
-  );
+  const [starredReposStats, setStarredReposStats] = useState<
+    RepoStats[] | null
+  >(null);
 
   useEffect(() => {
     if (!value) {
@@ -94,9 +94,9 @@ function App() {
       style={{
         display: "flex",
         flexDirection: "column",
-        justifyContent: "center",
+        alignItems: "center",
         flexWrap: "wrap",
-        gap: "16px",
+        gap: "24px",
         padding: "16px",
       }}
     >
@@ -121,7 +121,9 @@ function App() {
             style={{
               display: "flex",
               justifyContent: "flex-end",
-              padding: "8px",
+              gap: "8px",
+              width: "100%",
+              margin: 0,
             }}
           >
             <button
@@ -130,7 +132,7 @@ function App() {
                 padding: "8px",
                 borderRadius: "8px",
                 cursor: "pointer",
-                minWidth: "100px",
+                width: "150px",
               }}
               onClick={() => {
                 removeValue();
@@ -140,10 +142,12 @@ function App() {
               Disconnect Github
             </button>
           </nav>
-          <div style={{ display: "flex", gap: "16px" }}>
+          <div className="card-container">
             {userData && <ProfileCard userData={userData} />}
             {starredRepos && <StarredReposCard starredRepos={starredRepos} />}
-            {starredReposStats && <RepoStatsCard starredReposStats={starredReposStats} />}
+            {starredReposStats && (
+              <RepoStatsCard starredReposStats={starredReposStats} />
+            )}
           </div>
         </>
       )}

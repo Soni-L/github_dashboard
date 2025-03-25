@@ -67,7 +67,7 @@ const ContributionHeatmap: React.FC<HeatmapProps> = ({ data, days = 365 }) => {
   });
 
   return (
-    <div>
+    <div style={{ flex: "1 1 300px", maxWidth: "1000px" }}>
       <div className="heatmap-container">
         <div className="weekdays">
           {weekdays.map((day) => (

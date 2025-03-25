@@ -23,14 +23,16 @@ const StarredReposCard: React.FC<StarredReposCardProps> = ({
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
+        flex: "1 1 280px",
+        maxWidth: "280px",
       }}
     >
       <h4 style={{ margin: 0, color: "gold" }}>Starred repositories</h4>
       <div
         style={{
           display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
-          gap: "16px",
+          gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+          gap: "8px",
         }}
       >
         {starredRepos && starredRepos?.length > 0 ? (

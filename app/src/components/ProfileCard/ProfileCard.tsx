@@ -23,6 +23,8 @@ const ProfileCard: React.FC<ProfileCardProps> = ({ userData }) => {
         width: "fit-content",
         position: "relative",
         paddingTop: "28px",
+        flex: "1 1 220px",
+        maxWidth: "220px",
       }}
     >
       <h4
