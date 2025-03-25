@@ -14,7 +14,7 @@ export default function RepoStatsStatusChecker({
   return (
     <div
       className={running ? "pulsating" : ""}
-      style={{ display: "flex", flexDirection: "column", gap: "8px" }}
+      style={{ display: "flex", flexDirection: "column", gap: "16px" }}
     >
       {running ? "🔄 Processing repository stats..." : "✅ Data Complete"}
       {running === false && (
@@ -22,7 +22,7 @@ export default function RepoStatsStatusChecker({
           style={{
             cursor: "pointer",
             backgroundColor: "green",
-            padding: "4px",
+            padding: "6px",
             borderRadius: "4px",
             maxWidth: "200px",
           }}
